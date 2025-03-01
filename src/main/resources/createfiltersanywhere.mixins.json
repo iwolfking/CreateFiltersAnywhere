@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "xyz.iwolfking.createfiltersanywhere.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "createfiltersanywhere.refmap.json",
+  "mixins": [
+    "sophisticatedcore.MixinSophItemMatcher"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
