@@ -14,6 +14,8 @@ repositories {
         url "https://cursemaven.com"
     }
     maven { url 'https://maven.fallenbreath.me/releases' }
+    maven { url = "https://maven.createmod.net" }
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
 }
 
 base {
@@ -122,6 +124,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
     implementation "curse.maven:create-328085:6255497"
+    implementation "net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:1.0.39"
     implementation "curse.maven:sophisticated-backpacks-422301:6246606"
     implementation "curse.maven:sophisticated-core-618298:6241158"
     implementation "curse.maven:applied-energistics-2-223794:6225422"

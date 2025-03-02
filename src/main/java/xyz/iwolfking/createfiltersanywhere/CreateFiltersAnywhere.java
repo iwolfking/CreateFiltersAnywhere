@@ -1,6 +1,7 @@
 package xyz.iwolfking.createfiltersanywhere;
 
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.AllDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -34,6 +35,7 @@ import org.slf4j.Logger;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFAAsync;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFACache;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
+import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(CreateFiltersAnywhere.MODID)
@@ -50,6 +52,8 @@ public class CreateFiltersAnywhere {
 
         NeoForge.EVENT_BUS.register(CFACache.class);
         NeoForge.EVENT_BUS.register(CFATests.class);
+
+        CFAComponents.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.SERVER, Config.SPEC);
     }

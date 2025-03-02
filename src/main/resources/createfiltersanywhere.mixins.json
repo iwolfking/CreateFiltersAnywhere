@@ -7,10 +7,15 @@
   "plugin": "xyz.iwolfking.createfiltersanywhere.plugins.CreateFiltersAnywhereMixinPlugin",
   "mixins": [
     "create.FilterItemInvoker",
+    "create.MixinCreateFilteringBehaviour",
+    "create.MixinFilterMenu",
+    "create.MixinFilterScreenPacket",
+    "create.MixinListFilterItemStack",
     "sophisticatedcore.MixinSophItemMatcher"
   ],
   "client": [
-    "create.MixinClientFilterItem"
+    "create.MixinClientFilterItem",
+    "create.MixinFilterScreen"
   ],
   "injectors": {
     "defaultRequire": 1

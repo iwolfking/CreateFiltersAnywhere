@@ -6,6 +6,8 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -19,9 +21,15 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
 
 import java.util.List;
 
+@Restriction(
+        require = {
+                @Condition("create")
+        }
+)
 @Mixin(FilterItem.class)
 public abstract class MixinClientFilterItem {
 
@@ -69,14 +77,13 @@ public abstract class MixinClientFilterItem {
     private <E> E showAndAnyInListFilterTooltip(E e, @Local LocalBooleanRef blacklist,
                                                 @Local(argsOnly = true) ItemStack filter) {
 
-//        boolean matchAll = filter.getTag().getBoolean("MatchAll");
+        boolean matchAll = filter.getOrDefault(CFAComponents.FILTER_ITEMS_MATCH_ALL, false);
           MutableComponent filterTypeComp = (MutableComponent) e;
-//        if (matchAll) {
-//            filterTypeComp.append(Components.literal(" (All)").withStyle(ChatFormatting.GOLD));
-//        } else {
-//            filterTypeComp.append(Components.literal(" (Any)").withStyle(ChatFormatting.GOLD));
-//        }
-        filterTypeComp.append(Component.literal(" (Any) ").withStyle(ChatFormatting.GOLD));
+        if (matchAll) {
+            filterTypeComp.append(Component.literal(" (All)").withStyle(ChatFormatting.GOLD));
+        } else {
+            filterTypeComp.append(Component.literal(" (Any)").withStyle(ChatFormatting.GOLD));
+        }
         return (E) filterTypeComp;
     }
 
