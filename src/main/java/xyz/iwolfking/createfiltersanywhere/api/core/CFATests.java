@@ -14,6 +14,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.event.level.LevelEvent;
 import xyz.iwolfking.createfiltersanywhere.CreateFiltersAnywhere;
+import xyz.iwolfking.createfiltersanywhere.CreateVersion;
 
 import java.lang.invoke.MethodHandle;
 
@@ -48,7 +49,7 @@ public class CFATests {
             }
         }
 
-        if (true) {
+        if (CreateVersion.getLoadedVersion().equals(CreateVersion.CREATE_06)) {
             if (filterStack instanceof ItemStack stackFilter) {
                 return FilterItemStack.of(stackFilter).test(level, stack);
             } else if (filterStack instanceof FilterItemStack filterItemStack) {
@@ -56,13 +57,13 @@ public class CFATests {
             } else if (filterStack instanceof AEItemKey aeItemKey) {
                 return FilterItemStack.of(aeItemKey.toStack()).test(level,stack);
             }
-            CreateFiltersAnywhere.LOGGER.debug("[0.5.1.f] invalid filter entered");
+            CreateFiltersAnywhere.LOGGER.debug("[6.0.1] invalid filter entered");
             return false;
         }
+        else {
+            CreateFiltersAnywhere.LOGGER.debug("Your Create version is not supported yet! Disabling functionality.");
+        }
 
-//        if (CreateVersion.getLoadedVersion() == CreateVersion.LEGACY) {
-//            return basicFilterTestLegacy(filterStack, stack, level);
-//        }
         return false;
     }
 
@@ -72,7 +73,7 @@ public class CFATests {
 
 
     @SubscribeEvent
-    public static void onWorldLoad(LevelEvent event) {
+    public static void onWorldLoad(LevelEvent.Load event) {
         MinecraftServer server = event.getLevel().getServer();
         if (server != null) {
             level = server.getLevel(Level.OVERWORLD);

@@ -12,39 +12,44 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-// An example config class. This is not required, but it's a good idea to have one to keep your config organized.
-// Demonstrates how to use Neo's config APIs
-@EventBusSubscriber(modid = CreateFiltersAnywhere.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Config {
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    public static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    public static final ModConfigSpec SPEC;
 
-    private static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER.comment("Whether to log the dirt block on common setup").define("logDirtBlock", true);
+    public static final ModConfigSpec.ConfigValue<Integer> CACHE_TTK;
+    public static final ModConfigSpec.ConfigValue<Boolean> MR_COMPAT;
+    public static final ModConfigSpec.ConfigValue<Boolean> RS_COMPAT;
+    public static final ModConfigSpec.ConfigValue<Boolean> BACKPACKS_COMPAT;
+    public static final ModConfigSpec.ConfigValue<Boolean> AE2_COMPAT;
+    public static final ModConfigSpec.ConfigValue<Boolean> TOMS_COMPAT;
+    public static final ModConfigSpec.ConfigValue<Boolean> CACHE_DATAFIX;
 
-    private static final ModConfigSpec.IntValue MAGIC_NUMBER = BUILDER.comment("A magic number").defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
+    static {
+        BUILDER.push("Vault Filters Server Config");
 
-    public static final ModConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION = BUILDER.comment("What you want the introduction message to be for the magic number").define("magicNumberIntroduction", "The magic number is... ");
+        CACHE_TTK = BUILDER.comment("\nHow long till an unused cache entry gets cleared" +
+                "\nin minutes" +
+                "\nMinimum 2" +
+                "\nDefault: 5").defineInRange("Cache time to kill",5,2,100);
 
-    // a list of strings that are treated as resource locations for items
-    private static final ModConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS = BUILDER.comment("A list of items to log on common setup.").defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), Config::validateItemName);
+        MR_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Modular Router modules" +
+                "\nDefault:true").define("Modular Routers Compatibility",true);
 
-    static final ModConfigSpec SPEC = BUILDER.build();
+        RS_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Refined Storage exporters and grid filters" +
+                "\nDefault:true").define("Refined Storage Compatibility", true);
 
-    public static boolean logDirtBlock;
-    public static int magicNumber;
-    public static String magicNumberIntroduction;
-    public static Set<Item> items;
+        BACKPACKS_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside sophisticated backpacks upgrades" +
+                "\nDefault:true").define("Backpacks Compatibility",true);
 
-    private static boolean validateItemName(final Object obj) {
-        return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
-    }
+        AE2_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside AE2 exporter buses and terminal filters" +
+                "\nDefault:true").define("AE2 Compatibility", true);
 
-    @SubscribeEvent
-    static void onLoad(final ModConfigEvent event) {
-        logDirtBlock = LOG_DIRT_BLOCK.get();
-        magicNumber = MAGIC_NUMBER.get();
-        magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
+        TOMS_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Tom's filtered inventory connector" +
+                "\nDefault:true").define("Tom's Simple Storage Compatibility", true);
 
-        // convert the list of strings into a set of items
-        items = ITEM_STRINGS.get().stream().map(itemName -> BuiltInRegistries.ITEM.get(ResourceLocation.parse(itemName))).collect(Collectors.toSet());
+        CACHE_DATAFIX = BUILDER.comment("\nDelete old cache entries from items when they're filtered through" +
+                "\nDefault:false").define("Old cache data fixer", false);
+        BUILDER.pop();
+        SPEC = BUILDER.build();
     }
 }

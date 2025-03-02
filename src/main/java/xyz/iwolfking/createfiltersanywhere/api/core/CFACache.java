@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
+import xyz.iwolfking.createfiltersanywhere.Config;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,7 +22,7 @@ public class CFACache {
     public CFACache(int itemHash) {
         this.itemHash = itemHash;
         this.filterMap = new ConcurrentHashMap<>();
-        this.ttk = 10;
+        this.ttk = Config.CACHE_TTK.get();
     }
 
     public CFACache addFilter(int filterHash, boolean result) {
@@ -39,7 +40,7 @@ public class CFACache {
     }
 
     public void resetTTK() {
-        this.ttk = 10;
+        this.ttk = Config.CACHE_TTK.get();
     }
 
     public void tick() {
@@ -88,7 +89,7 @@ public class CFACache {
         ITEM_CACHES.values().forEach(CFACache::tick);
     }
     @SubscribeEvent
-    public static void onServerTick(ServerTickEvent event) {
+    public static void onServerTick(ServerTickEvent.Post event) {
         if (++ticks >= 60 * 20 ) { // 60 seconds * 20 tps
             asyncIterateCache();
             ticks = 0;

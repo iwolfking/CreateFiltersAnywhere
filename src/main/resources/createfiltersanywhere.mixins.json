@@ -4,10 +4,13 @@
   "package": "xyz.iwolfking.createfiltersanywhere.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "createfiltersanywhere.refmap.json",
+  "plugin": "xyz.iwolfking.createfiltersanywhere.plugins.CreateFiltersAnywhereMixinPlugin",
   "mixins": [
+    "create.FilterItemInvoker",
     "sophisticatedcore.MixinSophItemMatcher"
   ],
   "client": [
+    "create.MixinClientFilterItem"
   ],
   "injectors": {
     "defaultRequire": 1
