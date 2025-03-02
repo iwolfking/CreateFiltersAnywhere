@@ -9,12 +9,16 @@
     "compat.ae2.MixinFuzzyPriorityList",
     "compat.ae2.MixinPrecisePriorityList",
     "compat.ae2.MixinStorageExportStrategy",
+    "compat.modularrouters.MixinBulkItemMatcher",
+    "compat.modularrouters.MixinContainerModule",
+    "compat.modularrouters.MixinItemStackHashingStrategy",
+    "compat.modularrouters.MixinSimpleItemMatcher",
+    "compat.sophisticatedcore.MixinSophItemMatcher",
     "create.FilterItemInvoker",
     "create.MixinCreateFilteringBehaviour",
     "create.MixinFilterMenu",
     "create.MixinFilterScreenPacket",
-    "create.MixinListFilterItemStack",
-    "sophisticatedcore.MixinSophItemMatcher"
+    "create.MixinListFilterItemStack"
   ],
   "client": [
     "create.MixinClientFilterItem",

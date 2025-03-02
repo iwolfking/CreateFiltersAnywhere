@@ -1,4 +1,4 @@
-package xyz.iwolfking.createfiltersanywhere.mixin.sophisticatedcore;
+package xyz.iwolfking.createfiltersanywhere.mixin.compat.sophisticatedcore;
 
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import me.fallenbreath.conditionalmixin.api.annotation.Condition;
