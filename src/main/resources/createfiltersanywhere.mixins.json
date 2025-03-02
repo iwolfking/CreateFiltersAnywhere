@@ -6,6 +6,9 @@
   "refmap": "createfiltersanywhere.refmap.json",
   "plugin": "xyz.iwolfking.createfiltersanywhere.plugins.CreateFiltersAnywhereMixinPlugin",
   "mixins": [
+    "compat.ae2.MixinFuzzyPriorityList",
+    "compat.ae2.MixinPrecisePriorityList",
+    "compat.ae2.MixinStorageExportStrategy",
     "create.FilterItemInvoker",
     "create.MixinCreateFilteringBehaviour",
     "create.MixinFilterMenu",

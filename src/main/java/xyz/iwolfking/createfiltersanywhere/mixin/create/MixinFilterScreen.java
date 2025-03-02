@@ -10,6 +10,8 @@ import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.gui.widget.IconButton;
 import com.simibubi.create.foundation.gui.widget.Indicator;
 import com.simibubi.create.foundation.utility.CreateLang;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.entity.player.Inventory;
@@ -25,6 +27,11 @@ import xyz.iwolfking.createfiltersanywhere.api.accessors.FilterMenuAdvancedAcces
 import java.util.Arrays;
 import java.util.List;
 
+@Restriction(
+        require = {
+                @Condition("create")
+        }
+)
 @Mixin(value = FilterScreen.class, remap = false)
 public abstract class MixinFilterScreen extends AbstractFilterScreen<FilterMenu> {
     @Shadow
