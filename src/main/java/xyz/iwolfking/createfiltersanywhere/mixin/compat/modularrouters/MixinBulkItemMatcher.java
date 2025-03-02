@@ -3,6 +3,8 @@ package xyz.iwolfking.createfiltersanywhere.mixin.compat.modularrouters;
 import me.desht.modularrouters.api.matching.IModuleFlags;
 import me.desht.modularrouters.logic.filter.matchers.BulkItemMatcher;
 import me.desht.modularrouters.util.SetofItemStack;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,6 +14,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
+@Restriction(
+        require = {
+                @Condition("modularrouters")
+        }
+)
 @Mixin(value = BulkItemMatcher.class, remap = false)
 public class MixinBulkItemMatcher {
     @Shadow

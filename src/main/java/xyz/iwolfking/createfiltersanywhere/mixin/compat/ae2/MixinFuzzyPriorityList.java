@@ -7,6 +7,8 @@ import appeng.api.stacks.AEKey;
 import appeng.api.stacks.KeyCounter;
 import appeng.util.prioritylist.FuzzyPriorityList;
 import com.simibubi.create.content.logistics.filter.FilterItem;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -16,6 +18,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.createfiltersanywhere.Config;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
+@Restriction(
+        require = {
+                @Condition("ae2")
+        }
+)
 @Mixin(value = FuzzyPriorityList.class, remap = false)
 public abstract class MixinFuzzyPriorityList {
     @Shadow

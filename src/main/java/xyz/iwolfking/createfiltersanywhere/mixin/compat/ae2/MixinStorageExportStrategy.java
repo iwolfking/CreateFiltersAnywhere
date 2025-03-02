@@ -12,6 +12,8 @@ import appeng.parts.automation.StorageExportStrategy;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.logistics.filter.FilterItem;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
+import me.fallenbreath.conditionalmixin.api.annotation.Condition;
+import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.core.Direction;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import org.checkerframework.checker.units.qual.C;
@@ -26,6 +28,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.createfiltersanywhere.Config;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
+@Restriction(
+        require = {
+                @Condition("ae2")
+        }
+)
 @Mixin(value = StorageExportStrategy.class, remap = false)
 public abstract class MixinStorageExportStrategy<T, S> implements StackExportStrategy {
 
