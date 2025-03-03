@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.createfiltersanywhere.Config;
+import xyz.iwolfking.createfiltersanywhere.api.compat.AE2KeyHandler;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 @Restriction(
@@ -39,7 +40,7 @@ public abstract class MixinPrecisePriorityList {
             }
 
             if (itemKey.getItem() instanceof FilterItem && input instanceof AEItemKey inputItemKey) {
-                boolean result = CFATests.checkFilter(inputItemKey, itemKey, true, null);
+                boolean result = AE2KeyHandler.checkFilter(inputItemKey, itemKey, true, null);
                 if (result || (!(inputItemKey.getItem() instanceof FilterItem) && this.list.get(input) > 0L)) {
                     cir.setReturnValue(true);
                     break;

@@ -1,6 +1,6 @@
 package xyz.iwolfking.createfiltersanywhere.api.core;
 
-import appeng.api.stacks.AEItemKey;
+
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import static xyz.iwolfking.createfiltersanywhere.api.core.CFAAsync.asyncIterateCache;
 
 public class CFACache {
-    private static final ConcurrentHashMap<Integer, CFACache> ITEM_CACHES = new ConcurrentHashMap<>();
+    public static final ConcurrentHashMap<Integer, CFACache> ITEM_CACHES = new ConcurrentHashMap<>();
     private static int ticks = 0;
 
     private final int itemHash;
@@ -68,23 +68,7 @@ public class CFACache {
         cache.addFilter(filterHash, result);
         return result;
     }
-    public static boolean getOrCreateFilter(AEItemKey stack, Object filterStack, Level level) {
-        int itemHash = stack.hashCode();
-        CFACache cache = ITEM_CACHES.get(itemHash);
-        if (cache == null) {
-            boolean result = CFATests.noCacheDetailedTest(stack.toStack(),filterStack,level);
-            ITEM_CACHES.put(itemHash, new CFACache(itemHash).addFilter(filterStack.hashCode(), result));
-            return result;
-        }
-        int filterHash = filterStack.hashCode();
-        Boolean cachedResult = cache.result(filterHash);
-        if (cachedResult != null) {
-            return cachedResult;
-        }
-        boolean result = CFATests.basicFilterTest(stack.toStack(), filterStack, level);
-        cache.addFilter(filterHash, result);
-        return result;
-    }
+
     public static void iterateCache() {
         ITEM_CACHES.values().forEach(CFACache::tick);
     }
