@@ -37,7 +37,6 @@ public class MixinListFilterItemStack {
     @Inject(method = "<init>", at = @At("TAIL"), remap = false)
     public void initMatchALl(ItemStack filter, CallbackInfo ci, @Local boolean defaults) {
         vault_filters$isMatchAll = filter.getOrDefault(CFAComponents.FILTER_ITEMS_MATCH_ALL, false);
-        CreateFiltersAnywhere.LOGGER.info("Initiated match all!! - " + vault_filters$isMatchAll);
 
     }
 
@@ -49,7 +48,6 @@ public class MixinListFilterItemStack {
 
         // Injected code to handle `isMatchAll`
         if (vault_filters$isMatchAll) {
-            CreateFiltersAnywhere.LOGGER.info("List Filter with Match All triggering!!");
             for (FilterItemStack filterItemStack : this.containedItems) {
                 if (!(filterItemStack.test(world, stack, shouldRespectNBT))) {
                     cir.setReturnValue(isBlacklist);
