@@ -123,13 +123,14 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    implementation "curse.maven:create-328085:6255497"
+    implementation "curse.maven:create-328085:6271847"
     implementation "net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:1.0.39"
     implementation "curse.maven:sophisticated-backpacks-422301:6246606"
     implementation "curse.maven:sophisticated-core-618298:6241158"
     implementation "curse.maven:applied-energistics-2-223794:6225422"
     implementation "curse.maven:modular-routers-250294:6130459"
     implementation "curse.maven:toms-storage-378609:6123292"
+    runtimeOnly "curse.maven:spark-361579:6225208"
     runtimeOnly "curse.maven:guideme-1173950:6223759"
 
     implementation 'me.fallenbreath:conditional-mixin-neoforge:0.6.4'
