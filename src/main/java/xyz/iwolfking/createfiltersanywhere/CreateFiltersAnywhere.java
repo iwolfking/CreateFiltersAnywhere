@@ -2,10 +2,16 @@ package xyz.iwolfking.createfiltersanywhere;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.AllDataComponents;
+import com.simibubi.create.api.registry.CreateBuiltInRegistries;
+import com.simibubi.create.content.logistics.item.filter.attribute.AllItemAttributeTypes;
+import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -27,11 +33,9 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
+import xyz.iwolfking.createfiltersanywhere.api.attributes.abstracts.test.TestBooleanAttribute;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFAAsync;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFACache;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
@@ -47,7 +51,7 @@ public class CreateFiltersAnywhere {
 
     public CreateFiltersAnywhere(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
-
+        modEventBus.addListener(this::registerAttributes);
         NeoForge.EVENT_BUS.register(this);
 
         NeoForge.EVENT_BUS.register(CFACache.class);
@@ -58,7 +62,14 @@ public class CreateFiltersAnywhere {
         modContainer.registerConfig(ModConfig.Type.SERVER, Config.SPEC);
     }
 
+    public void registerAttributes(RegisterEvent event) {
+        event.register(CreateBuiltInRegistries.ITEM_ATTRIBUTE_TYPE.key(), registry -> {
+            new TestBooleanAttribute(true).register(TestBooleanAttribute::new);
+        });
+    }
+
     private void commonSetup(final FMLCommonSetupEvent event) {
+
     }
 
     @SubscribeEvent
@@ -70,5 +81,9 @@ public class CreateFiltersAnywhere {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
         }
+    }
+
+    public static ResourceLocation asResource(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }
