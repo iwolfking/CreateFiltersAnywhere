@@ -36,6 +36,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
 import xyz.iwolfking.createfiltersanywhere.api.attributes.abstracts.test.TestBooleanAttribute;
+import xyz.iwolfking.createfiltersanywhere.api.attributes.abstracts.test.TestStringAttribute;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFAAsync;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFACache;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
@@ -64,7 +65,6 @@ public class CreateFiltersAnywhere {
 
     public void registerAttributes(RegisterEvent event) {
         event.register(CreateBuiltInRegistries.ITEM_ATTRIBUTE_TYPE.key(), registry -> {
-            new TestBooleanAttribute(true).register(TestBooleanAttribute::new);
         });
     }
 

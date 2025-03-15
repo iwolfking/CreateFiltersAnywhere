@@ -34,8 +34,4 @@ public abstract class BooleanAttribute extends CFAAttribute<Boolean>{
     public BooleanAttribute withValue(Boolean value) {
         return factories.getOrDefault(getClass(), ignored -> null).apply(value);
     }
-
-    public ItemAttribute getAttribute(ItemStack itemStack) {
-        return Boolean.TRUE.equals(getValue(itemStack)) ? withValue(true) : null;
-    }
 }

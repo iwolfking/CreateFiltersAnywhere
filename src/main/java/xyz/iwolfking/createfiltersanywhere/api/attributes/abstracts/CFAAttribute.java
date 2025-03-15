@@ -32,12 +32,12 @@ public abstract class CFAAttribute<V> implements ItemAttribute {
     }
 
     public void register() {
-        CreateAttributeRegistry.register(this.getTranslationKey(), new SingletonItemAttribute.Type(type -> new SingletonItemAttribute(type, this::appliesTo, this.getTranslationKey())));
+        CreateAttributeRegistry.register(this.getTranslationKey(), getType());
     }
 
     @Override
     public ItemAttributeType getType() {
-        return null;
+        return new SingletonItemAttribute.Type(type -> new SingletonItemAttribute(type, this::appliesTo, this.getTranslationKey()));
     }
 
     public abstract String getTranslationKey();
