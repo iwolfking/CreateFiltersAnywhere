@@ -1,26 +1,8 @@
 package xyz.iwolfking.createfiltersanywhere;
 
 import com.mojang.logging.LogUtils;
-import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.api.registry.CreateBuiltInRegistries;
-import com.simibubi.create.content.logistics.item.filter.attribute.AllItemAttributeTypes;
-import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -30,14 +12,12 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
-import xyz.iwolfking.createfiltersanywhere.api.attributes.abstracts.test.TestBooleanAttribute;
-import xyz.iwolfking.createfiltersanywhere.api.attributes.abstracts.test.TestStringAttribute;
-import xyz.iwolfking.createfiltersanywhere.api.core.CFAAsync;
+import xyz.iwolfking.createfiltersanywhere.api.CreateAttributeRegistry;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFACache;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
@@ -63,8 +43,13 @@ public class CreateFiltersAnywhere {
         modContainer.registerConfig(ModConfig.Type.SERVER, Config.SPEC);
     }
 
+
     public void registerAttributes(RegisterEvent event) {
         event.register(CreateBuiltInRegistries.ITEM_ATTRIBUTE_TYPE.key(), registry -> {
+            if(LoadingModList.get().getModFileById("sophisticatedbackpacks") != null) {
+                CreateAttributeRegistry.register("has_backpack_uuid", CreateAttributeRegistry.HAS_BACKPACK_UUID);
+                CreateAttributeRegistry.register("has_backpack_upgrade", CreateAttributeRegistry.HAS_BACKPACK_UPGRADE);
+            }
         });
     }
 
