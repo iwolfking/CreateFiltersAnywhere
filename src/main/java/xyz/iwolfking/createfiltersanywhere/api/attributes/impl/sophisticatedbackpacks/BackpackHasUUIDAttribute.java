@@ -32,7 +32,7 @@ public record BackpackHasUUIDAttribute(String UUID) implements ItemAttribute {
 
     @Override
     public ItemAttributeType getType() {
-        return CreateAttributeRegistry.HAS_BACKPACK_UUID;
+        return SophisticatedBackpackAttributes.HAS_BACKPACK_UUID;
     }
 
     @Override

@@ -18,6 +18,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
 import xyz.iwolfking.createfiltersanywhere.api.CreateAttributeRegistry;
+import xyz.iwolfking.createfiltersanywhere.api.attributes.impl.sophisticatedbackpacks.SophisticatedBackpackAttributes;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFACache;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
@@ -47,8 +48,8 @@ public class CreateFiltersAnywhere {
     public void registerAttributes(RegisterEvent event) {
         event.register(CreateBuiltInRegistries.ITEM_ATTRIBUTE_TYPE.key(), registry -> {
             if(LoadingModList.get().getModFileById("sophisticatedbackpacks") != null) {
-                CreateAttributeRegistry.register("has_backpack_uuid", CreateAttributeRegistry.HAS_BACKPACK_UUID);
-                CreateAttributeRegistry.register("has_backpack_upgrade", CreateAttributeRegistry.HAS_BACKPACK_UPGRADE);
+                CreateAttributeRegistry.register("has_backpack_uuid", SophisticatedBackpackAttributes.HAS_BACKPACK_UUID);
+                CreateAttributeRegistry.register("has_backpack_upgrade", SophisticatedBackpackAttributes.HAS_BACKPACK_UPGRADE);
             }
         });
     }

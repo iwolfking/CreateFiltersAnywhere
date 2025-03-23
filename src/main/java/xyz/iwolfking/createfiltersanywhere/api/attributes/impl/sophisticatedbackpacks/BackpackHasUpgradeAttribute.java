@@ -45,7 +45,7 @@ public record BackpackHasUpgradeAttribute(String upgrade) implements ItemAttribu
 
     @Override
     public ItemAttributeType getType() {
-        return CreateAttributeRegistry.HAS_BACKPACK_UPGRADE;
+        return SophisticatedBackpackAttributes.HAS_BACKPACK_UPGRADE;
     }
 
     @Override
