@@ -9,6 +9,7 @@
     "compat.ae2.MixinFuzzyPriorityList",
     "compat.ae2.MixinPrecisePriorityList",
     "compat.ae2.MixinStorageExportStrategy",
+    "compat.laserio.MixinBaseCardCache",
     "compat.modularrouters.MixinBulkItemMatcher",
     "compat.modularrouters.MixinContainerModule",
     "compat.modularrouters.MixinItemStackHashingStrategy",
