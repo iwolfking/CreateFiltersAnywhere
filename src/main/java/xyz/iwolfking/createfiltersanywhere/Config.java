@@ -22,10 +22,11 @@ public class Config {
     public static final ModConfigSpec.ConfigValue<Boolean> BACKPACKS_COMPAT;
     public static final ModConfigSpec.ConfigValue<Boolean> AE2_COMPAT;
     public static final ModConfigSpec.ConfigValue<Boolean> TOMS_COMPAT;
+    public static final ModConfigSpec.ConfigValue<Boolean> LASERIO_COMPAT;
     public static final ModConfigSpec.ConfigValue<Boolean> CACHE_DATAFIX;
 
     static {
-        BUILDER.push("Vault Filters Server Config");
+        BUILDER.push("Create Filters Anywhere Server Config");
 
         CACHE_TTK = BUILDER.comment("\nHow long till an unused cache entry gets cleared" +
                 "\nin minutes" +
@@ -44,8 +45,11 @@ public class Config {
         AE2_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside AE2 exporter buses and terminal filters" +
                 "\nDefault:true").define("AE2 Compatibility", true);
 
-        TOMS_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Tom's filtered inventory connector" +
+        TOMS_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside Tom's basic filter item" +
                 "\nDefault:true").define("Tom's Simple Storage Compatibility", true);
+
+        LASERIO_COMPAT = BUILDER.comment("\nEnable compatibility for list and attribute filters inside LaserIO's Basic Filter card." +
+                "\nDefault:true").define("LaserIO Compatibility", true);
 
         CACHE_DATAFIX = BUILDER.comment("\nDelete old cache entries from items when they're filtered through" +
                 "\nDefault:false").define("Old cache data fixer", false);

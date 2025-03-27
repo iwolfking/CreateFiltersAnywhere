@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import xyz.iwolfking.createfiltersanywhere.Config;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 import java.util.List;
@@ -40,6 +41,10 @@ public class MixinBaseCardCache {
 
     @Inject(method = "isStackValidForCard(Lnet/minecraft/world/item/ItemStack;)Z", at = @At("HEAD"), remap = false, cancellable = true)
     private void checkCreateFilterForCard(ItemStack testStack, CallbackInfoReturnable<Boolean> cir) {
+        if(!Config.LASERIO_COMPAT.get()) {
+            return;
+        }
+
         if(this.filterCard.isEmpty()) {
             cir.setReturnValue(true);
         }
