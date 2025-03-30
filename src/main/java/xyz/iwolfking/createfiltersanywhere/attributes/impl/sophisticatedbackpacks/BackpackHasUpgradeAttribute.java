@@ -1,4 +1,4 @@
-package xyz.iwolfking.createfiltersanywhere.api.attributes.impl.sophisticatedbackpacks;
+package xyz.iwolfking.createfiltersanywhere.attributes.impl.sophisticatedbackpacks;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -11,17 +11,11 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.p3pp3rf1y.sophisticatedbackpacks.backpack.BackpackItem;
-import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.BackpackWrapper;
-import net.p3pp3rf1y.sophisticatedbackpacks.backpack.wrapper.IBackpackWrapper;
-import net.p3pp3rf1y.sophisticatedcore.upgrades.IUpgradeWrapper;
 import org.jetbrains.annotations.NotNull;
-import xyz.iwolfking.createfiltersanywhere.api.CreateAttributeRegistry;
-import xyz.iwolfking.createfiltersanywhere.api.attributes.impl.sophisticatedbackpacks.util.SophisticatedBackpackUtil;
+import xyz.iwolfking.createfiltersanywhere.api.util.sophisticatedbackpacks.SophisticatedBackpackUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
 public record BackpackHasUpgradeAttribute(String upgrade) implements ItemAttribute {
 

@@ -1,4 +1,4 @@
-package xyz.iwolfking.createfiltersanywhere.api.attributes.impl.sophisticatedbackpacks.util;
+package xyz.iwolfking.createfiltersanywhere.api.util.sophisticatedbackpacks;
 
 import net.minecraft.world.item.ItemStack;
 import net.p3pp3rf1y.sophisticatedbackpacks.backpack.BackpackItem;
@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class SophisticatedBackpackUtil {
     public static List<String> getUpgrades(ItemStack stack) {
@@ -32,7 +31,6 @@ public class SophisticatedBackpackUtil {
                 return uuid.get().toString();
             }
         }
-
 
         return null;
     }

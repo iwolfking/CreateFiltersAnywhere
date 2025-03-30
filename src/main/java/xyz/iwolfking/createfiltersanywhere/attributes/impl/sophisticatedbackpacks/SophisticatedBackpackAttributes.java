@@ -1,4 +1,4 @@
-package xyz.iwolfking.createfiltersanywhere.api.attributes.impl.sophisticatedbackpacks;
+package xyz.iwolfking.createfiltersanywhere.attributes.impl.sophisticatedbackpacks;
 
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 

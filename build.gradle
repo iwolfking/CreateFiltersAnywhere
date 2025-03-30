@@ -132,11 +132,22 @@ dependencies {
     implementation "curse.maven:toms-storage-378609:6123292"
     implementation "curse.maven:pipez-443900:5609056"
     implementation "curse.maven:laserio-626839:5730007"
-    runtimeOnly "curse.maven:spark-361579:6225208"
+    implementation "curse.maven:apotheosis-313970:6302343"
+
+    //Apotheosis dependencies
+    runtimeOnly "curse.maven:apothic-attributes-898963:6302334"
+    runtimeOnly "curse.maven:apothic-spawners-986583:6148923"
+    implementation "curse.maven:placebo-283644:6337156"
+    runtimeOnly "curse.maven:apothic-enchanting-1063926:6084297"
+
+    //AE2 Dependency
     runtimeOnly "curse.maven:guideme-1173950:6223759"
 
-    implementation 'me.fallenbreath:conditional-mixin-neoforge:0.6.4'
+    //Useful client mods for development
+    runtimeOnly "curse.maven:spark-361579:6225208"
 
+    //Dev libraries
+    implementation 'me.fallenbreath:conditional-mixin-neoforge:0.6.4'
     jarJar(group: 'me.fallenbreath', name: 'conditional-mixin-neoforge', version: '[0.6.4,)')
 
 }

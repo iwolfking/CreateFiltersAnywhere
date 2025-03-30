@@ -2,6 +2,7 @@ package xyz.iwolfking.createfiltersanywhere;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.api.registry.CreateBuiltInRegistries;
+import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -18,7 +19,9 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
 import xyz.iwolfking.createfiltersanywhere.api.CreateAttributeRegistry;
-import xyz.iwolfking.createfiltersanywhere.api.attributes.impl.sophisticatedbackpacks.SophisticatedBackpackAttributes;
+import xyz.iwolfking.createfiltersanywhere.api.util.apotheosis.ApotheosisUtil;
+import xyz.iwolfking.createfiltersanywhere.attributes.impl.apotheosis.ApotheosisAttributes;
+import xyz.iwolfking.createfiltersanywhere.attributes.impl.sophisticatedbackpacks.SophisticatedBackpackAttributes;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFACache;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
@@ -50,6 +53,12 @@ public class CreateFiltersAnywhere {
             if(LoadingModList.get().getModFileById("sophisticatedbackpacks") != null) {
                 CreateAttributeRegistry.register("has_backpack_uuid", SophisticatedBackpackAttributes.HAS_BACKPACK_UUID);
                 CreateAttributeRegistry.register("has_backpack_upgrade", SophisticatedBackpackAttributes.HAS_BACKPACK_UPGRADE);
+            }
+
+            if(LoadingModList.get().getModFileById("apotheosis") != null) {
+                CreateAttributeRegistry.register("apoth_gem_purity", ApotheosisAttributes.APOTH_GEM_PURITY);
+                CreateAttributeRegistry.singleton("apoth_gem_unique", ApotheosisUtil::isUniqueGem);
+                CreateAttributeRegistry.register("apoth_gem_bonus_type", ApotheosisAttributes.APOTH_GEM_BONUS_TYPE);
             }
         });
     }
