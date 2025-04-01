@@ -38,6 +38,35 @@ description = '''${mod_description}'''
 [[mixins]]
 config = "${mod_id}.mixins.json"
 
+[[mixins]]
+config = "createfiltersanywhere.ae2.mixins.json"
+requiredMods = ["ae2"]
+
+[[mixins]]
+config = "createfiltersanywhere.create.mixins.json"
+requiredMods = ["create"]
+
+[[mixins]]
+config = "createfiltersanywhere.laserio.mixins.json"
+requiredMods = ["laserio"]
+
+[[mixins]]
+config = "createfiltersanywhere.modularrouters.mixins.json"
+requiredMods = ["modularrouters"]
+
+[[mixins]]
+config = "createfiltersanywhere.refinedstorage.mixins.json"
+requiredMods = ["refinedstorage"]
+
+[[mixins]]
+config = "createfiltersanywhere.toms_storage.mixins.json"
+requiredMods = ["toms_storage"]
+
+[[mixins]]
+config = "createfiltersanywhere.sophisticatedcore.mixins.json"
+requiredMods = ["sophisticatedcore"]
+
+
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg
 #[[accessTransformers]]

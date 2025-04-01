@@ -5,8 +5,15 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "createfiltersanywhere.refmap.json",
   "mixins": [
+    "create.FilterItemInvoker",
+    "create.MixinCreateFilteringBehaviour",
+    "create.MixinFilterMenu",
+    "create.MixinFilterScreenPacket",
+    "create.MixinListFilterItemStack"
   ],
   "client": [
+    "create.MixinClientFilterItem",
+    "create.MixinFilterScreen"
   ],
   "injectors": {
     "defaultRequire": 1

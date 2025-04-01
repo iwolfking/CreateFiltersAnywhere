@@ -5,6 +5,10 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "createfiltersanywhere.refmap.json",
   "mixins": [
+    "compat.modularrouters.MixinBulkItemMatcher",
+    "compat.modularrouters.MixinContainerModule",
+    "compat.modularrouters.MixinItemStackHashingStrategy",
+    "compat.modularrouters.MixinSimpleItemMatcher"
   ],
   "client": [
   ],

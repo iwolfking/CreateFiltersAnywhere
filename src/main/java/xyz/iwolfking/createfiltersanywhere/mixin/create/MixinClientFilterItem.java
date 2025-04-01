@@ -6,8 +6,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalBooleanRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.simibubi.create.content.logistics.filter.FilterItem;
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -25,12 +23,8 @@ import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
 
 import java.util.List;
 
-@Restriction(
-        require = {
-                @Condition("create")
-        }
-)
 @Mixin(FilterItem.class)
+
 public abstract class MixinClientFilterItem {
 
     @WrapOperation(method = "makeSummary", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isEmpty()Z"))

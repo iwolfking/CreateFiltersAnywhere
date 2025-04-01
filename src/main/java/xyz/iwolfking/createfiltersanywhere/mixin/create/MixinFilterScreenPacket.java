@@ -3,8 +3,6 @@ package xyz.iwolfking.createfiltersanywhere.mixin.create;
 
 import com.simibubi.create.content.logistics.filter.FilterMenu;
 import com.simibubi.create.content.logistics.filter.FilterScreenPacket;
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -12,11 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import xyz.iwolfking.createfiltersanywhere.api.accessors.FilterMenuAdvancedAccessor;
 
-@Restriction(
-        require = {
-                @Condition("create")
-        }
-)
+
 @Mixin(value = FilterScreenPacket.class, remap = false)
 public class MixinFilterScreenPacket {
     @Final

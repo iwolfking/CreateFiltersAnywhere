@@ -3,8 +3,6 @@ package xyz.iwolfking.createfiltersanywhere.mixin.create;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.content.logistics.filter.FilterMenu;
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,11 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import xyz.iwolfking.createfiltersanywhere.api.accessors.FilterMenuAdvancedAccessor;
 import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
 
-@Restriction(
-        require = {
-                @Condition("create")
-        }
-)
+
 @Mixin(value = FilterMenu.class, remap = false)
 public class MixinFilterMenu implements FilterMenuAdvancedAccessor {
     @Shadow

@@ -2,8 +2,6 @@ package xyz.iwolfking.createfiltersanywhere.mixin.create;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,11 +16,7 @@ import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
 
 import java.util.List;
 
-@Restriction(
-        require = {
-                @Condition("create")
-        }
-)
+
 @Mixin(value = FilterItemStack.ListFilterItemStack.class, remap = false)
 public class MixinListFilterItemStack {
     @Unique

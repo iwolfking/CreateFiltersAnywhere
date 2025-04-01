@@ -6,8 +6,6 @@ import com.direwolf20.laserio.common.items.filters.FilterTag;
 import com.direwolf20.laserio.util.BaseCardCache;
 import com.direwolf20.laserio.util.ItemStackKey;
 import com.simibubi.create.content.logistics.filter.FilterItem;
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,11 +19,7 @@ import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 import java.util.List;
 import java.util.Map;
 
-@Restriction(
-        require = {
-                @Condition("laserio")
-        }
-)
+
 @Mixin(value = BaseCardCache.class, remap = false)
 public class MixinBaseCardCache {
 

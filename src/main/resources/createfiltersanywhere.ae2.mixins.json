@@ -5,6 +5,9 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "createfiltersanywhere.refmap.json",
   "mixins": [
+    "compat.ae2.MixinFuzzyPriorityList",
+    "compat.ae2.MixinPrecisePriorityList",
+    "compat.ae2.MixinStorageExportStrategy"
   ],
   "client": [
   ],

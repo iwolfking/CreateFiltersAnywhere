@@ -3,8 +3,6 @@ package xyz.iwolfking.createfiltersanywhere.mixin.create;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
-import me.fallenbreath.conditionalmixin.api.annotation.Condition;
-import me.fallenbreath.conditionalmixin.api.annotation.Restriction;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -13,11 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
-@Restriction(
-        require = {
-                @Condition("create")
-        }
-)
+
 @Mixin(value = FilteringBehaviour.class, remap = false)
 public abstract class MixinCreateFilteringBehaviour extends BlockEntityBehaviour {
 
