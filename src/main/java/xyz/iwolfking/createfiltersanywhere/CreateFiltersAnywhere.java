@@ -17,9 +17,12 @@ import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.fml.loading.mixin.DeferredMixinConfigRegistration;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
 import xyz.iwolfking.createfiltersanywhere.api.CreateAttributeRegistry;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAAsync;
 import xyz.iwolfking.createfiltersanywhere.api.util.apotheosis.ApotheosisUtil;
 import xyz.iwolfking.createfiltersanywhere.attributes.impl.apotheosis.ApotheosisAttributes;
 import xyz.iwolfking.createfiltersanywhere.attributes.impl.sophisticatedbackpacks.SophisticatedBackpackAttributes;
@@ -70,6 +73,11 @@ public class CreateFiltersAnywhere {
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
+    }
+
+    @SubscribeEvent
+    public void onServerStopped(ServerStoppedEvent event) {
+        CFAAsync.shutdownAsync();
     }
 
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
