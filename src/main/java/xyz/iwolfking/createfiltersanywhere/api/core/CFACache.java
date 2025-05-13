@@ -72,6 +72,7 @@ public class CFACache {
     public static void iterateCache() {
         ITEM_CACHES.values().forEach(CFACache::tick);
     }
+
     @SubscribeEvent
     public static void onServerTick(ServerTickEvent.Post event) {
         if (++ticks >= 60 * 20 ) { // 60 seconds * 20 tps

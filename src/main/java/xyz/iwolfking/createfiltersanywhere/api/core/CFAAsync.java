@@ -27,8 +27,9 @@ public class CFAAsync {
     }
     public static void shutdownAsync() {
         if (!isShuttingDown) {
-            EXECUTOR.shutdownNow();
             isShuttingDown = true;
+            EXECUTOR.shutdownNow();
+            EXECUTOR.close();
         }
 
     }
