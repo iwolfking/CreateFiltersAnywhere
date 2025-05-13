@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "createfiltersanywhere.refmap.json",
   "mixins": [
-    "compat.laserio.MixinBaseCardCache"
+    "compat.laserio.MixinBaseCardCache",
+    "compat.vanilla.MixinAllayEntity"
   ],
   "client": [
   ],
