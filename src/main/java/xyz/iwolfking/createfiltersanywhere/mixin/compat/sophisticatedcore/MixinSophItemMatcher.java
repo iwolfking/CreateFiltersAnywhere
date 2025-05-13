@@ -13,7 +13,7 @@ import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 @Mixin(FilterLogic.class)
 public class MixinSophItemMatcher {
-    @Inject(method = "stackMatchesFilter", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "stackMatchesFilter", at = @At("HEAD"), cancellable = true, remap = false)
     public void sophFilterMatcher(ItemStack stack, ItemStack filter, CallbackInfoReturnable<Boolean> cir) {
         if (Config.BACKPACKS_COMPAT.get() && filter.getItem() instanceof FilterItem) {
             cir.setReturnValue(CFATests.checkFilter(stack, filter,true,null));

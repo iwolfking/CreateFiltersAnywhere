@@ -28,8 +28,6 @@ public class CFATests {
             return basicFilterTest(stack,filterStack,level);
         }
 
-        Item stackItem = stack.getItem();
-
         return CFACache.getOrCreateFilter(stack,filterStack,level);
     }
 
