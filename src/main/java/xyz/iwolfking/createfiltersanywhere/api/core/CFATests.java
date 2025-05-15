@@ -23,6 +23,7 @@ public class CFATests {
     private static MethodHandle testMethodHandle;
     private static Level level;
 
+
     public static boolean checkFilter(ItemStack stack, Object filterStack, boolean useCache, Level level) {
         if (!useCache) {
             return basicFilterTest(stack,filterStack,level);

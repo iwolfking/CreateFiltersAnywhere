@@ -2,7 +2,6 @@ package xyz.iwolfking.createfiltersanywhere;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.api.registry.CreateBuiltInRegistries;
-import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -14,11 +13,9 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.LoadingModList;
-import net.neoforged.fml.loading.mixin.DeferredMixinConfigRegistration;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.server.ServerStoppedEvent;
-import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
 import xyz.iwolfking.createfiltersanywhere.api.CreateAttributeRegistry;
@@ -37,6 +34,11 @@ public class CreateFiltersAnywhere {
     public static final String MODID = "createfiltersanywhere";
 
     public static final Logger LOGGER = LogUtils.getLogger();
+
+
+    //Checking if certain mods are loaded:
+    public static boolean isCreateLoaded = false;
+    public static boolean isFTBFilterSystemLoaded = false;
 
     public CreateFiltersAnywhere(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
@@ -68,7 +70,8 @@ public class CreateFiltersAnywhere {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        isCreateLoaded = LoadingModList.get().getModFileById("create") != null;
+        isFTBFilterSystemLoaded = LoadingModList.get().getModFileById("ftbfiltersystem") != null;
     }
 
     @SubscribeEvent
