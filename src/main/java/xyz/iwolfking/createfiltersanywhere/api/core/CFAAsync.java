@@ -29,12 +29,12 @@ public class CFAAsync {
         if (!isShuttingDown) {
             isShuttingDown = true;
             EXECUTOR.shutdownNow();
-            EXECUTOR.close();
+            //EXECUTOR.close();
         }
 
     }
     static {
-        Runtime.getRuntime().addShutdownHook(new Thread(CFAAsync::shutdownAsync));
-        CreateFiltersAnywhere.LOGGER.info("shutting down extra thread");
+        //Runtime.getRuntime().addShutdownHook(new Thread(CFAAsync::shutdownAsync));
+        //CreateFiltersAnywhere.LOGGER.info("shutting down extra thread");
     }
 }
