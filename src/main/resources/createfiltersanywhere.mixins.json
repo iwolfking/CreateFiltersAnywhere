@@ -5,8 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "createfiltersanywhere.refmap.json",
   "mixins": [
-    "compat.vanilla.MixinAllayEntity",
-    "compat.vanilla.MixinItemStack"
+    "compat.vanilla.MixinAllayEntity"
   ],
   "client": [
   ],

@@ -9,7 +9,6 @@ import xyz.iwolfking.createfiltersanywhere.Config;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import static xyz.iwolfking.createfiltersanywhere.api.core.CFAAsync.asyncIterateCache;
 
 public class CFACache {
     public static final ConcurrentHashMap<Integer, CFACache> ITEM_CACHES = new ConcurrentHashMap<>();
@@ -52,32 +51,32 @@ public class CFACache {
     }
 
     public static boolean getOrCreateFilter(ItemStack stack, Object filterStack, Level level) {
-        int itemHash = stack.hashCode();
-        CFACache cache = ITEM_CACHES.get(itemHash);
-        if (cache == null) {
-            boolean result = CFATests.noCacheDetailedTest(stack,filterStack,level);
-            ITEM_CACHES.put(itemHash, new CFACache(itemHash).addFilter(filterStack.hashCode(), result));
-            return result;
-        }
-        int filterHash = filterStack.hashCode();
-        Boolean cachedResult = cache.result(filterHash);
-        if (cachedResult != null) {
-            return cachedResult;
-        }
-        boolean result = CFATests.basicFilterTest(stack, filterStack, level);
-        cache.addFilter(filterHash, result);
-        return result;
+//        int itemHash = stack.hashCode();
+//        CFACache cache = ITEM_CACHES.get(itemHash);
+//        if (cache == null) {
+//            boolean result = CFATests.noCacheDetailedTest(stack,filterStack,level);
+//            ITEM_CACHES.put(itemHash, new CFACache(itemHash).addFilter(filterStack.hashCode(), result));
+//            return result;
+//        }
+//        int filterHash = filterStack.hashCode();
+//        Boolean cachedResult = cache.result(filterHash);
+//        if (cachedResult != null) {
+//            return cachedResult;
+//       }
+//        boolean result = CFATests.basicFilterTest(stack, filterStack, level);
+//        cache.addFilter(filterHash, result);
+        return CFATests.basicFilterTest(stack, filterStack, level);
     }
 
     public static void iterateCache() {
         ITEM_CACHES.values().forEach(CFACache::tick);
     }
 
-    @SubscribeEvent
-    public static void onServerTick(ServerTickEvent.Post event) {
-        if (++ticks >= 60 * 20 ) { // 60 seconds * 20 tps
-            asyncIterateCache();
-            ticks = 0;
-        }
-    }
+//    @SubscribeEvent
+//    public static void onServerTick(ServerTickEvent.Post event) {
+//        if (++ticks >= 60 * 20 ) { // 60 seconds * 20 tps
+//            asyncIterateCache();
+//            ticks = 0;
+//        }
+//    }
 }
