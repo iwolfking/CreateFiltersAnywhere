@@ -134,6 +134,13 @@ dependencies {
     implementation "curse.maven:laserio-626839:5730007"
     implementation "curse.maven:apotheosis-313970:6302343"
     implementation "curse.maven:refined-storage-243076:6358597"
+    implementation "curse.maven:oritech-1030830:6653356"
+    implementation "curse.maven:architectury-api-419699:5786327"
+
+    //Oritech runtime dependencies
+    runtimeOnly "curse.maven:athena-841890:6669522"
+    runtimeOnly "curse.maven:owo-lib-532610:6416633"
+    runtimeOnly "curse.maven:geckolib-388172:5874016"
 
     //Apotheosis dependencies
     implementation "curse.maven:apothic-attributes-898963:6302334"
