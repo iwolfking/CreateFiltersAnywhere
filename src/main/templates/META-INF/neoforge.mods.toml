@@ -66,6 +66,10 @@ requiredMods = ["toms_storage"]
 config = "createfiltersanywhere.sophisticatedcore.mixins.json"
 requiredMods = ["sophisticatedcore"]
 
+[[mixins]]
+config = "createfiltersanywhere.oritech.mixins.json"
+requiredMods = ["oritech"]
+
 
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg
