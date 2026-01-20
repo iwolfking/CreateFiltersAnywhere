@@ -1,5 +1,6 @@
 package xyz.iwolfking.createfiltersanywhere.api.lib;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import xyz.iwolfking.createfiltersanywhere.api.integration.handlers.*;
 

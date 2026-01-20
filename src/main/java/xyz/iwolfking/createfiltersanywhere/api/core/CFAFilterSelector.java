@@ -6,6 +6,10 @@ import xyz.iwolfking.createfiltersanywhere.api.lib.FilterType;
 
 public class CFAFilterSelector {
     public static boolean isSupportedFilterStack(ItemStack filterStack) {
+        if(filterStack.equals(ItemStack.EMPTY)) {
+            return false;
+        }
+        
         return getFilterType(filterStack) != FilterType.INVALID;
     }
 
