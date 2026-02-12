@@ -2,6 +2,7 @@ package xyz.iwolfking.createfiltersanywhere.mixin.compat.modularrouters;
 
 import me.desht.modularrouters.api.matching.IModuleFlags;
 import me.desht.modularrouters.logic.filter.matchers.SimpleItemMatcher;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +21,7 @@ public class MixinSimpleItemMatcher {
     private ItemStack filterStack;
 
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
-    public void createFilterMatcher(ItemStack stack, IModuleFlags flags, CallbackInfoReturnable<Boolean> cir) {
+    public void createFilterMatcher(ItemStack stack, IModuleFlags flags, HolderLookup.Provider registryAccess, CallbackInfoReturnable<Boolean> cir) {
         if (Config.MR_COMPAT.get() && CFAFilterSelector.isSupportedFilterStack(filterStack)) {
             cir.setReturnValue(CFAFilterSelector.doFilterTest(stack, this.filterStack));
         }

@@ -130,7 +130,6 @@ dependencies {
     implementation "curse.maven:sophisticated-core-618298:7493486"
     implementation "curse.maven:sophisticated-storage-619320:7436697"
     implementation "curse.maven:applied-energistics-2-223794:6225422"
-    compileOnly "curse.maven:modular-routers-250294:6130459"
     implementation "curse.maven:toms-storage-378609:6123292"
     implementation "curse.maven:pipez-443900:5609056"
     implementation "curse.maven:laserio-626839:5730007"
@@ -138,6 +137,7 @@ dependencies {
     implementation "curse.maven:refined-storage-243076:6358597"
     implementation "curse.maven:oritech-1030830:6653356"
     implementation "curse.maven:architectury-api-419699:5786327"
+    implementation "curse.maven:modular-routers-250294:7525002"
 
     //Oritech runtime dependencies
     runtimeOnly "curse.maven:athena-841890:6669522"

@@ -3,6 +3,7 @@ package xyz.iwolfking.createfiltersanywhere.mixin.compat.modularrouters;
 import me.desht.modularrouters.api.matching.IModuleFlags;
 import me.desht.modularrouters.logic.filter.matchers.BulkItemMatcher;
 import me.desht.modularrouters.util.SetofItemStack;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,11 +21,10 @@ public class MixinBulkItemMatcher {
     private SetofItemStack stacks;
 
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
-    public void createItemMatcher(ItemStack stack, IModuleFlags flags, CallbackInfoReturnable<Boolean> cir) {
+    public void createItemMatcher(ItemStack stack, IModuleFlags flags, HolderLookup.Provider registryAccess, CallbackInfoReturnable<Boolean> cir) {
         if(!Config.MR_COMPAT.get()) {
             return;
         }
-
 
         for (ItemStack filter : this.stacks) {
             if(CFAFilterSelector.isSupportedFilterStack(filter))

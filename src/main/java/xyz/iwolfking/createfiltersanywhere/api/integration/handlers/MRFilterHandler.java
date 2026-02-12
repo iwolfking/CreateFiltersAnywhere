@@ -15,7 +15,7 @@ public class MRFilterHandler {
     public static boolean checkFilter(ItemStack stack, ItemStack filterStack) {
         if(filterStack.getItem() instanceof SmartFilterItem smartFilterItem) {
             IItemMatcher matcher = smartFilterItem.compile(filterStack, stack);
-            return matcher.matchItem(stack, new ModuleFlags(false, true, false, false, false));
+            return matcher.matchItem(stack, new ModuleFlags(false, true, false, false, false), null);
         }
 
         return false;
