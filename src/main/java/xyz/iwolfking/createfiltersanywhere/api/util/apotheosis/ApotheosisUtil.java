@@ -5,11 +5,11 @@ import dev.shadowsoffire.apotheosis.socket.gem.GemItem;
 import dev.shadowsoffire.apotheosis.socket.gem.Purity;
 import dev.shadowsoffire.apotheosis.socket.gem.bonus.GemBonus;
 import dev.shadowsoffire.placebo.reload.DynamicHolder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import xyz.iwolfking.createfiltersanywhere.api.util.StringUtils;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -60,5 +60,18 @@ public class ApotheosisUtil {
         }
 
         return names;
+    }
+
+    public static String getGemId(ItemStack stack) {
+        if(isGemItem(stack)) {
+            DynamicHolder<Gem> gem = GemItem.getGem(stack);
+            if(gem.getOptional().isPresent()) {
+                ResourceLocation id = gem.get().getId();
+                if (id != null) {
+                    return id.toString();
+                }
+            }
+        }
+        return null;
     }
 }

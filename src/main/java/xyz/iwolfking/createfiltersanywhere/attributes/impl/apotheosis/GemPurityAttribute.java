@@ -9,9 +9,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import org.apache.commons.lang3.text.WordUtils;
 import org.jetbrains.annotations.NotNull;
-import xyz.iwolfking.createfiltersanywhere.api.util.StringUtils;
 import xyz.iwolfking.createfiltersanywhere.api.util.apotheosis.ApotheosisUtil;
 
 import java.util.ArrayList;
@@ -45,7 +43,7 @@ public record GemPurityAttribute(Purity purity) implements ItemAttribute {
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{StringUtils.toTitleCase(this.purity.getName())};
+        return new Object[]{this.purity.toComponent()};
     }
 
     public static class Type implements ItemAttributeType {
