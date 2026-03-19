@@ -66,6 +66,11 @@ public class CreateFiltersAnywhere {
                 CreateAttributeRegistry.register("apoth_gem_purity", ApotheosisAttributes.APOTH_GEM_PURITY);
                 CreateAttributeRegistry.singleton("apoth_gem_unique", ApotheosisUtil::isUniqueGem);
                 CreateAttributeRegistry.register("apoth_gem_bonus_type", ApotheosisAttributes.APOTH_GEM_BONUS_TYPE);
+                CreateAttributeRegistry.register("apoth_gem_id", ApotheosisAttributes.APOTH_GEM_ID);
+                CreateAttributeRegistry.register("apoth_loot_rarity", ApotheosisAttributes.APOTH_LOOT_RARITY);
+                CreateAttributeRegistry.register("apoth_has_affix", ApotheosisAttributes.APOTH_HAS_AFFIX);
+                CreateAttributeRegistry.register("apoth_socket_count", ApotheosisAttributes.APOTH_SOCKET_COUNT);
+                CreateAttributeRegistry.register("apoth_socket_count_empty", ApotheosisAttributes.APOTH_SOCKET_COUNT_EMPTY);
             }
         });
     }
@@ -82,7 +87,7 @@ public class CreateFiltersAnywhere {
     }
 
 
-    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = MODID, value = Dist.CLIENT)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
