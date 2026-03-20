@@ -34,7 +34,9 @@ public record LootRarityAttribute(String rarity) implements ItemAttribute {
 
     @Override
     public boolean appliesTo(ItemStack itemStack, Level level) {
-        ResourceLocation itemRarity = RarityRegistry.INSTANCE.getKey(AffixHelper.getRarity(itemStack).get());
+        DynamicHolder<LootRarity> rarity = AffixHelper.getRarity(itemStack);
+        if (!rarity.isBound()) return false;
+        ResourceLocation itemRarity = RarityRegistry.INSTANCE.getKey(rarity.get());
         if (itemRarity == null) return false;
         return itemRarity.toString().equals(this.rarity);
     }

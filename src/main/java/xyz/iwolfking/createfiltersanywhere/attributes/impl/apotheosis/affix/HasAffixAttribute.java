@@ -4,7 +4,9 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
+import dev.shadowsoffire.apotheosis.affix.Affix;
 import dev.shadowsoffire.apotheosis.affix.AffixHelper;
+import dev.shadowsoffire.placebo.reload.DynamicHolder;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -32,7 +34,8 @@ public record HasAffixAttribute(String affixType) implements ItemAttribute {
     public boolean appliesTo(ItemStack itemStack, Level level) {
         var affixes = AffixHelper.getAffixes(itemStack);
         for (var entry : affixes.entrySet()) {
-            if (entry.getKey().get().id().toString().equals(this.affixType)) {
+            DynamicHolder<Affix> affix = entry.getKey();
+            if (affix.isBound() && affix.get().id().toString().equals(this.affixType) ) {
                 return true;
             }
         }
@@ -65,7 +68,10 @@ public record HasAffixAttribute(String affixType) implements ItemAttribute {
             List<ItemAttribute> list = new ArrayList<>();
             var affixes = AffixHelper.getAffixes(stack);
             for (var entry : affixes.entrySet()) {
-                list.add(new HasAffixAttribute(entry.getKey().get().id().toString()));
+                DynamicHolder<Affix> affix = entry.getKey();
+                if (affix.isBound()) {
+                    list.add(new HasAffixAttribute(affix.get().id().toString()));
+                }
             }
 
             return list;
