@@ -9,8 +9,6 @@ import appeng.api.stacks.AEKey;
 import appeng.api.storage.StorageHelper;
 import appeng.parts.automation.HandlerStrategy;
 import appeng.parts.automation.StorageExportStrategy;
-import com.llamalad7.mixinextras.sugar.Local;
-import com.simibubi.create.content.logistics.filter.FilterItem;
 import it.unimi.dsi.fastutil.objects.Object2LongMap;
 import net.minecraft.core.Direction;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
@@ -21,7 +19,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import xyz.iwolfking.createfiltersanywhere.Config;
 import xyz.iwolfking.createfiltersanywhere.api.compat.AE2KeyHandler;
-import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
 
 
 @Mixin(value = StorageExportStrategy.class, remap = false)
@@ -45,7 +43,7 @@ public abstract class MixinStorageExportStrategy<T, S> implements StackExportStr
                 return 0L;
             } else {
                 IStorageService inv = context.getInternalStorage();
-                if (what instanceof AEItemKey itemKey && Config.AE2_COMPAT.get() && itemKey.getItem() instanceof FilterItem) {
+                if (what instanceof AEItemKey itemKey && Config.AE2_COMPAT.get() && CFAFilterSelector.isSupportedFilterStack(itemKey.toStack())) {
                     for (Object2LongMap.Entry<AEKey> key : inv.getInventory().getAvailableStacks()) {
                         AEKey aek = key.getKey();
                         if (!(aek instanceof AEItemKey itemKey2)) {

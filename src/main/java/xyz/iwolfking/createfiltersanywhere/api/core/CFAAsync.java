@@ -12,7 +12,6 @@ public class CFAAsync {
     //private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor();
 //    private static Future<?> currentTask;
 //    private static boolean isShuttingDown = false;
-
 //    public static void asyncIterateCache() {
 //        if (currentTask != null && !currentTask.isDone()) {
 //            currentTask.cancel(true);

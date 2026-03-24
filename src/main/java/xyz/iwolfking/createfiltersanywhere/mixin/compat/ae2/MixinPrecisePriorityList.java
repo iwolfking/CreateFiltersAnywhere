@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.createfiltersanywhere.Config;
 import xyz.iwolfking.createfiltersanywhere.api.compat.AE2KeyHandler;
-import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 
 @Mixin(value = PrecisePriorityList.class, remap = false)

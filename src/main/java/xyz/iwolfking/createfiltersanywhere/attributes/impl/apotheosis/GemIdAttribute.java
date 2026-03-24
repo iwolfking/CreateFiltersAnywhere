@@ -6,64 +6,60 @@ import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import xyz.iwolfking.createfiltersanywhere.api.util.StringUtils;
 import xyz.iwolfking.createfiltersanywhere.api.util.apotheosis.ApotheosisUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-public record GemBonusTypeAttribute(String bonus) implements ItemAttribute {
+public record GemIdAttribute(String gemId) implements ItemAttribute {
 
-    public static final MapCodec<GemBonusTypeAttribute> CODEC = Codec.STRING
-            .xmap(GemBonusTypeAttribute::new, GemBonusTypeAttribute::bonus)
-            .fieldOf("value");
+    public static final MapCodec<GemIdAttribute> CODEC = Codec.STRING
+        .xmap(GemIdAttribute::new, GemIdAttribute::gemId)
+        .fieldOf("value");
 
-    public static final StreamCodec<ByteBuf, GemBonusTypeAttribute> STREAM_CODEC = ByteBufCodecs.STRING_UTF8
-            .map(GemBonusTypeAttribute::new, GemBonusTypeAttribute::bonus);
+    public static final StreamCodec<ByteBuf, GemIdAttribute> STREAM_CODEC = ByteBufCodecs.STRING_UTF8
+        .map(GemIdAttribute::new, GemIdAttribute::gemId);
 
 
     @Override
     public boolean appliesTo(ItemStack itemStack, Level level) {
-        Set<String> gemBonuses = ApotheosisUtil.getGemBonusesTypeNames(itemStack);
-        return !gemBonuses.isEmpty() && gemBonuses.contains(bonus);
+        String gemId = ApotheosisUtil.getGemId(itemStack);
+        return gemId != null && gemId.equals(this.gemId);
     }
 
     @Override
     public ItemAttributeType getType() {
-        return ApotheosisAttributes.APOTH_GEM_BONUS_TYPE;
+        return ApotheosisAttributes.APOTH_GEM_ID;
     }
 
     @Override
     public String getTranslationKey() {
-        return "apoth_gem_bonus_type";
+        return "apoth_gem_id";
     }
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{StringUtils.toTitleCase(this.bonus)};
+        return new Object[]{Component.translatable("item.apotheosis.gem." + gemId)};
     }
 
     public static class Type implements ItemAttributeType {
         @Override
         public @NotNull ItemAttribute createAttribute() {
-            return new GemBonusTypeAttribute("Attribute");
+            return new GemIdAttribute("apotheosis:core/guardian");
         }
 
         @Override
         public List<ItemAttribute> getAllAttributes(ItemStack stack, Level level) {
             List<ItemAttribute> list = new ArrayList<>();
-            Set<String> gemBonuses = ApotheosisUtil.getGemBonusesTypeNames(stack);
-            if (!gemBonuses.isEmpty()) {
-                for(String gemBonus : gemBonuses) {
-                    list.add(new GemBonusTypeAttribute(gemBonus));
-                }
-
+            String gemId = ApotheosisUtil.getGemId(stack);
+            if (gemId != null) {
+                list.add(new GemIdAttribute(gemId));
             }
 
             return list;

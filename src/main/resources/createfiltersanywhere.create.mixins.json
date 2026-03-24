@@ -15,7 +15,9 @@
   "client": [
     "create.MixinClientFilterItem",
     "create.MixinFilterScreen",
-    "create.MixinAttributeFilterScreen"
+    "create.MixinAttributeFilterScreen",
+    "create.MixinAttributeFilterItem",
+    "create.MixinListFilterItem"
   ],
   "injectors": {
     "defaultRequire": 1

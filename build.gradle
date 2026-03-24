@@ -123,12 +123,13 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    implementation "curse.maven:create-328085:6271847"
-    implementation "net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:1.0.39"
-    implementation "curse.maven:sophisticated-backpacks-422301:6246606"
-    implementation "curse.maven:sophisticated-core-618298:6241158"
+    implementation "curse.maven:create-328085:7178775"
+    implementation "curse.maven:ftb-filter-system-943925:6259288"
+    implementation "net.createmod.ponder:Ponder-NeoForge-${minecraft_version}:1.0.64"
+    implementation "curse.maven:sophisticated-backpacks-422301:7455017"
+    implementation "curse.maven:sophisticated-core-618298:7493486"
+    implementation "curse.maven:sophisticated-storage-619320:7436697"
     implementation "curse.maven:applied-energistics-2-223794:6225422"
-    implementation "curse.maven:modular-routers-250294:6130459"
     implementation "curse.maven:toms-storage-378609:6123292"
     implementation "curse.maven:pipez-443900:5609056"
     implementation "curse.maven:laserio-626839:5730007"
@@ -136,6 +137,7 @@ dependencies {
     implementation "curse.maven:refined-storage-243076:6358597"
     implementation "curse.maven:oritech-1030830:6653356"
     implementation "curse.maven:architectury-api-419699:5786327"
+    implementation "curse.maven:modular-routers-250294:7525002"
 
     //Oritech runtime dependencies
     runtimeOnly "curse.maven:athena-841890:6669522"
@@ -154,6 +156,8 @@ dependencies {
     //Useful client mods for development
     runtimeOnly "curse.maven:spark-361579:6225208"
     runtimeOnly "curse.maven:jei-238222:6516057"
+    runtimeOnly "curse.maven:architectury-api-419699:5786327"
+    runtimeOnly "curse.maven:ftb-library-forge-404465:6466106"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

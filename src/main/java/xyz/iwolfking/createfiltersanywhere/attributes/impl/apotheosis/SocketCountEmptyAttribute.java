@@ -1,65 +1,63 @@
 package xyz.iwolfking.createfiltersanywhere.attributes.impl.apotheosis;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttribute;
 import com.simibubi.create.content.logistics.item.filter.attribute.ItemAttributeType;
-import dev.shadowsoffire.apotheosis.socket.gem.Purity;
+import dev.shadowsoffire.apotheosis.socket.SocketHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
-import xyz.iwolfking.createfiltersanywhere.api.util.StringUtils;
-import xyz.iwolfking.createfiltersanywhere.api.util.apotheosis.ApotheosisUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public record GemUniqueAttribute(Purity purity) implements ItemAttribute {
+public record SocketCountEmptyAttribute(int count) implements ItemAttribute {
 
-    public static final MapCodec<GemUniqueAttribute> CODEC = Purity.CODEC
-            .xmap(GemUniqueAttribute::new, GemUniqueAttribute::purity)
+    public static final MapCodec<SocketCountEmptyAttribute> CODEC = Codec.INT
+            .xmap(SocketCountEmptyAttribute::new, SocketCountEmptyAttribute::count)
             .fieldOf("value");
 
-    public static final StreamCodec<ByteBuf, GemUniqueAttribute> STREAM_CODEC = Purity.STREAM_CODEC
-            .map(GemUniqueAttribute::new, GemUniqueAttribute::purity);
+    public static final StreamCodec<ByteBuf, SocketCountEmptyAttribute> STREAM_CODEC = ByteBufCodecs.INT
+            .map(SocketCountEmptyAttribute::new, SocketCountEmptyAttribute::count);
+
 
     @Override
     public boolean appliesTo(ItemStack itemStack, Level level) {
-        Optional<Purity> gemPurity = ApotheosisUtil.getPurityOf(itemStack);
-        return gemPurity.isPresent() && gemPurity.get().equals(purity);
+        return SocketHelper.getSockets(itemStack) >= count;
     }
 
     @Override
     public ItemAttributeType getType() {
-        return ApotheosisAttributes.APOTH_GEM_PURITY;
+        return ApotheosisAttributes.APOTH_SOCKET_COUNT_EMPTY;
     }
 
     @Override
     public String getTranslationKey() {
-        return "apoth_gem_purity";
+        return "apoth_socket_count_empty";
     }
 
     @Override
     public Object[] getTranslationParameters() {
-        return new Object[]{StringUtils.toTitleCase(this.purity.getName())};
+        return new Object[]{this.count};
     }
 
     public static class Type implements ItemAttributeType {
         @Override
         public @NotNull ItemAttribute createAttribute() {
-            return new GemUniqueAttribute(Purity.NORMAL);
+            return new SocketCountEmptyAttribute(2);
         }
 
         @Override
         public List<ItemAttribute> getAllAttributes(ItemStack stack, Level level) {
             List<ItemAttribute> list = new ArrayList<>();
-            Optional<Purity> purity = ApotheosisUtil.getPurityOf(stack);
-            if (purity != null && purity.isPresent()) {
-                list.add(new GemUniqueAttribute(purity.get()));
-            }
+            int sockets = (int) SocketHelper.getGems(stack).gems().stream().filter(x -> !x.isValid()).count();
+            if (sockets > 0)
+                list.add(new SocketCountEmptyAttribute(sockets));
 
             return list;
         }

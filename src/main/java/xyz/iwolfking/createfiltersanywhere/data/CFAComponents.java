@@ -16,7 +16,7 @@ public class CFAComponents {
     public static final DataComponentType<Boolean> FILTER_ITEMS_MATCH_ALL;
 
     private static <T> DataComponentType<T> register(String name, UnaryOperator<DataComponentType.Builder<T>> builder) {
-        DataComponentType<T> type = ((DataComponentType.Builder)builder.apply(DataComponentType.builder())).build();
+        DataComponentType<T> type = builder.apply(DataComponentType.builder()).build();
         DATA_COMPONENTS.register(name, () -> type);
         return type;
     }
