@@ -19,7 +19,7 @@ repositories {
 }
 
 base {
-    archivesName = mod_id
+    archivesName = mod_id + "-" + minecraft_version
 }
 
 
