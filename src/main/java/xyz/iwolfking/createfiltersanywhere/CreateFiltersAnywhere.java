@@ -19,6 +19,7 @@ import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
 import xyz.iwolfking.createfiltersanywhere.api.CreateAttributeRegistry;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
+import xyz.iwolfking.createfiltersanywhere.api.integration.IntegrationHandler;
 import xyz.iwolfking.createfiltersanywhere.api.lib.FilterType;
 import xyz.iwolfking.createfiltersanywhere.api.util.apotheosis.ApotheosisUtil;
 import xyz.iwolfking.createfiltersanywhere.attributes.impl.apotheosis.ApotheosisAttributes;
@@ -82,7 +83,11 @@ public class CreateFiltersAnywhere {
         isFTBFilterSystemLoaded = LoadingModList.get().getModFileById("ftbfiltersystem") != null;
         isModularRoutersLoaded = LoadingModList.get().getModFileById("modularrouters") != null;
         isTomsStorageLoaded = LoadingModList.get().getModFileById("toms_storage") != null;
-        CFAFilterSelector.LOADED_FILTER_TYPES.addAll(Arrays.asList(FilterType.values()));
+        for(FilterType type : FilterType.values()) {
+            if(IntegrationHandler.isModLoaded(type.modId)) {
+                CFAFilterSelector.LOADED_FILTER_TYPES.add(type);
+            }
+        }
     }
 
     @SubscribeEvent

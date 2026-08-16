@@ -1,5 +1,6 @@
 package xyz.iwolfking.createfiltersanywhere.api.util.apotheosis;
 
+import dev.shadowsoffire.apotheosis.Apoth;
 import dev.shadowsoffire.apotheosis.affix.AffixHelper;
 import dev.shadowsoffire.apotheosis.loot.LootRarity;
 import dev.shadowsoffire.apotheosis.socket.gem.Gem;
@@ -78,6 +79,6 @@ public class ApotheosisUtil {
     }
 
     public static boolean hasRarity(ItemStack stack) {
-        return AffixHelper.getRarity(stack) != null;
+        return stack.has(Apoth.Components.RARITY);
     }
 }
