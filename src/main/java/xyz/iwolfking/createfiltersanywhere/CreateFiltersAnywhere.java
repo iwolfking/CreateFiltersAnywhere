@@ -66,6 +66,7 @@ public class CreateFiltersAnywhere {
             if(LoadingModList.get().getModFileById("apotheosis") != null) {
                 CreateAttributeRegistry.register("apoth_gem_purity", ApotheosisAttributes.APOTH_GEM_PURITY);
                 CreateAttributeRegistry.singleton("apoth_gem_unique", ApotheosisUtil::isUniqueGem);
+                CreateAttributeRegistry.singleton("apoth_has_rarity", ApotheosisUtil::hasRarity);
                 CreateAttributeRegistry.register("apoth_gem_bonus_type", ApotheosisAttributes.APOTH_GEM_BONUS_TYPE);
                 CreateAttributeRegistry.register("apoth_gem_id", ApotheosisAttributes.APOTH_GEM_ID);
                 CreateAttributeRegistry.register("apoth_loot_rarity", ApotheosisAttributes.APOTH_LOOT_RARITY);
