@@ -3,7 +3,6 @@ package xyz.iwolfking.createfiltersanywhere.api.core;
 import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;

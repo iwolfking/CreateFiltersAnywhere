@@ -15,17 +15,18 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.event.server.ServerStoppedEvent;
 import net.neoforged.neoforge.registries.*;
 import org.slf4j.Logger;
 import xyz.iwolfking.createfiltersanywhere.api.CreateAttributeRegistry;
-import xyz.iwolfking.createfiltersanywhere.api.core.CFAAsync;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
+import xyz.iwolfking.createfiltersanywhere.api.lib.FilterType;
 import xyz.iwolfking.createfiltersanywhere.api.util.apotheosis.ApotheosisUtil;
 import xyz.iwolfking.createfiltersanywhere.attributes.impl.apotheosis.ApotheosisAttributes;
 import xyz.iwolfking.createfiltersanywhere.attributes.impl.sophisticatedbackpacks.SophisticatedBackpackAttributes;
-import xyz.iwolfking.createfiltersanywhere.api.core.CFACache;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
+
+import java.util.Arrays;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(CreateFiltersAnywhere.MODID)
@@ -80,6 +81,7 @@ public class CreateFiltersAnywhere {
         isFTBFilterSystemLoaded = LoadingModList.get().getModFileById("ftbfiltersystem") != null;
         isModularRoutersLoaded = LoadingModList.get().getModFileById("modularrouters") != null;
         isTomsStorageLoaded = LoadingModList.get().getModFileById("toms_storage") != null;
+        CFAFilterSelector.LOADED_FILTER_TYPES.addAll(Arrays.asList(FilterType.values()));
     }
 
     @SubscribeEvent

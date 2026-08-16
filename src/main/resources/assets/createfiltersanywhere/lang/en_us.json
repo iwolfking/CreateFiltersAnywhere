@@ -15,6 +15,8 @@
   "create.item_attributes.apoth_loot_rarity.inverted": "doesn't have a '%1$s' rarity",
   "create.item_attributes.apoth_has_affix": "has '%1$s' affix",
   "create.item_attributes.apoth_has_affix.inverted": "doesn't have '%1$s' affix",
+  "create.item_attributes.apoth_has_rarity": "has an Apotheosis rarity",
+  "create.item_attributes.apoth_has_rarity.inverted": "doesn't have an Apotheosis rarity",
   "create.item_attributes.apoth_socket_count": "has at least '%1$s' sockets",
   "create.item_attributes.apoth_socket_count.inverted": "doesn't have at least '%1$s' sockets",
   "create.item_attributes.apoth_socket_count_empty": "has at least '%1$s' empty sockets",
