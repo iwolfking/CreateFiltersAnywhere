@@ -1,28 +1,23 @@
 package xyz.iwolfking.createfiltersanywhere.api.integration.ftbquests;
 
-import com.simibubi.create.content.logistics.filter.FilterItem;
-import com.simibubi.create.content.logistics.filter.FilterItemStack;
 import dev.ftb.mods.ftbquests.api.ItemFilterAdapter;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import net.neoforged.fml.loading.FMLLoader;
-import net.neoforged.neoforge.server.ServerLifecycleHooks;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
+import xyz.iwolfking.createfiltersanywhere.api.lib.FilterType;
 
 public class CreateItemFilterAdapter implements ItemFilterAdapter {
 
     @Override
     public String getName() {
-        return "Create";
+        return "Create Filters Anywhere";
     }
 
     @Override
     public boolean isFilterStack(ItemStack stack) {
-        return !stack.isEmpty() && stack.getItem() instanceof FilterItem;
+        return !stack.isEmpty() && CFAFilterSelector.isSupportedFilterStack(stack);
     }
 
     @Override
@@ -31,10 +26,9 @@ public class CreateItemFilterAdapter implements ItemFilterAdapter {
             return false;
         }
 
-        Level level = resolveLevel();
-        FilterItemStack wrapper = FilterItemStack.of(filterStack);
+        FilterType filterType = CFAFilterSelector.getFilterType(filterStack);
 
-        return wrapper.test(level, toCheck);
+        return filterType.checkFilter(filterStack, toCheck);
     }
 
     @Override
@@ -43,14 +37,14 @@ public class CreateItemFilterAdapter implements ItemFilterAdapter {
             return NO_MATCH;
         }
 
-        FilterItemStack wrapper = FilterItemStack.of(itemStack.copy());
+        FilterType filterType = CFAFilterSelector.getFilterType(itemStack);
 
         return stackToTest -> {
             if (stackToTest.isEmpty()) {
                 return false;
             }
-            Level level = resolveLevel();
-            return wrapper.test(level, stackToTest);
+
+            return filterType.checkFilter(itemStack, stackToTest);
         };
     }
 
@@ -62,21 +56,5 @@ public class CreateItemFilterAdapter implements ItemFilterAdapter {
     @Override
     public ItemStack makeTagFilterStack(TagKey<Item> tag) {
         return ItemStack.EMPTY;
-    }
-
-    private Level resolveLevel() {
-        if (FMLLoader.getDist().isClient()) {
-            Level clientLevel = Minecraft.getInstance().level;
-            if (clientLevel != null) {
-                return clientLevel;
-            }
-        }
-
-        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-        if (server != null) {
-            return server.getLevel(Level.OVERWORLD);
-        }
-
-        return null;
     }
 }
