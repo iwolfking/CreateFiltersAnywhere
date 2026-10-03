@@ -2,6 +2,7 @@ package xyz.iwolfking.createfiltersanywhere;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.api.registry.CreateBuiltInRegistries;
+import dev.ftb.mods.ftbquests.api.FTBQuestsAPI;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -20,6 +21,7 @@ import org.slf4j.Logger;
 import xyz.iwolfking.createfiltersanywhere.api.CreateAttributeRegistry;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
 import xyz.iwolfking.createfiltersanywhere.api.integration.IntegrationHandler;
+import xyz.iwolfking.createfiltersanywhere.api.integration.ftbquests.FTBQuestsIntegration;
 import xyz.iwolfking.createfiltersanywhere.api.lib.FilterType;
 import xyz.iwolfking.createfiltersanywhere.api.util.EnergyAttributeHelper;
 import xyz.iwolfking.createfiltersanywhere.api.util.apotheosis.ApotheosisUtil;
@@ -107,6 +109,7 @@ public class CreateFiltersAnywhere {
                 CFAFilterSelector.LOADED_FILTER_TYPES.add(type);
             }
         }
+        event.enqueueWork(FTBQuestsIntegration::register);
     }
 
     @SubscribeEvent

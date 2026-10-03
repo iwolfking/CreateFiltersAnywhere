@@ -138,6 +138,7 @@ dependencies {
     implementation "curse.maven:oritech-1030830:6653356"
     implementation "curse.maven:architectury-api-419699:5786327"
     implementation "curse.maven:modular-routers-250294:7525002"
+    implementation "curse.maven:ftb-quests-forge-289412:8885017"
 
     //Oritech runtime dependencies
     runtimeOnly "curse.maven:athena-841890:6669522"
