@@ -21,13 +21,13 @@ import xyz.iwolfking.createfiltersanywhere.api.CreateAttributeRegistry;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
 import xyz.iwolfking.createfiltersanywhere.api.integration.IntegrationHandler;
 import xyz.iwolfking.createfiltersanywhere.api.lib.FilterType;
+import xyz.iwolfking.createfiltersanywhere.api.util.EnergyAttributeHelper;
 import xyz.iwolfking.createfiltersanywhere.api.util.apotheosis.ApotheosisUtil;
 import xyz.iwolfking.createfiltersanywhere.attributes.impl.apotheosis.ApotheosisAttributes;
+import xyz.iwolfking.createfiltersanywhere.attributes.impl.general.ModAttributes;
 import xyz.iwolfking.createfiltersanywhere.attributes.impl.sophisticatedbackpacks.SophisticatedBackpackAttributes;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
-
-import java.util.Arrays;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(CreateFiltersAnywhere.MODID)
@@ -75,6 +75,25 @@ public class CreateFiltersAnywhere {
                 CreateAttributeRegistry.register("apoth_socket_count", ApotheosisAttributes.APOTH_SOCKET_COUNT);
                 CreateAttributeRegistry.register("apoth_socket_count_empty", ApotheosisAttributes.APOTH_SOCKET_COUNT_EMPTY);
             }
+
+            CreateAttributeRegistry.singleton(
+                    "is_uncharged",
+                    EnergyAttributeHelper::isUncharged
+            );
+
+            CreateAttributeRegistry.singleton(
+                    "can_be_charged",
+                    EnergyAttributeHelper::canBeCharged
+            );
+
+            CreateAttributeRegistry.singleton(
+                    "is_fully_charged",
+                    EnergyAttributeHelper::isFullyCharged
+            );
+
+            CreateAttributeRegistry.register("has_data_component", ModAttributes.HAS_DATA_COMPONENT);
+            CreateAttributeRegistry.register("is_item", ModAttributes.IS_ITEM);
+
         });
     }
 
