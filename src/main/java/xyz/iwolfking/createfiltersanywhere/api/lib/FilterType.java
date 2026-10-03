@@ -12,6 +12,7 @@ public enum FilterType {
     FTB("ftbfiltersystem", () -> FFSFilterHandler::checkFilter, () -> FFSFilterHandler::isSupportedFilterItem),
     MODULAR_ROUTERS("modularrouters", () -> MRFilterHandler::checkFilter, () -> MRFilterHandler::isSupportedFilterItem),
     TOMS_STORAGE("toms_storage", () -> TomsFilterHandler::checkFilter, () -> TomsFilterHandler::isSupportedFilterItem),
+    ARS_NOUVEAU("ars_nouveau", () -> ArsFilterHandler::checkFilter, () -> ArsFilterHandler::isSupportedFilterItem),
     INVALID("", () -> FilterHandler::checkFilter, () -> FilterHandler::isSupportedFilterItem);
 
     public final Supplier<BiFunction<ItemStack, ItemStack, Boolean>> filterFunction;
@@ -22,5 +23,9 @@ public enum FilterType {
         this.modId = modId;
         this.filterFunction = filterFunction;
         this.filterValidationFunction = filterValidationMethod;
+    }
+
+    public boolean checkFilter(ItemStack filterStack, ItemStack stackToCheck) {
+        return this.filterFunction.get().apply(stackToCheck, filterStack);
     }
 }
