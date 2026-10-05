@@ -26,9 +26,7 @@ public class CreateItemFilterAdapter implements ItemFilterAdapter {
             return false;
         }
 
-        FilterType filterType = CFAFilterSelector.getFilterType(filterStack);
-
-        return filterType.checkFilter(filterStack, toCheck);
+        return CFAFilterSelector.doFilterTest(toCheck, filterStack);
     }
 
     @Override
@@ -37,14 +35,12 @@ public class CreateItemFilterAdapter implements ItemFilterAdapter {
             return NO_MATCH;
         }
 
-        FilterType filterType = CFAFilterSelector.getFilterType(itemStack);
-
         return stackToTest -> {
             if (stackToTest.isEmpty()) {
                 return false;
             }
 
-            return filterType.checkFilter(itemStack, stackToTest);
+            return CFAFilterSelector.doFilterTest(stackToTest, itemStack);
         };
     }
 

@@ -15,11 +15,11 @@ public class CFAFilterSelector {
     private static final ConcurrentHashMap<Item, FilterType> CACHED_ITEM_FILTER_TYPES = new ConcurrentHashMap<>();
 
     public static boolean isSupportedFilterStack(ItemStack filterStack) {
-        if(filterStack.isEmpty()) {
-            return false;
-        }
+        return isSupportedFilterStack(filterStack.getItem());
+    }
 
-        return getFilterType(filterStack) != FilterType.INVALID;
+    public static boolean isSupportedFilterStack(Item filterItem) {
+        return getFilterType(filterItem) != FilterType.INVALID;
     }
 
     public static boolean doFilterTest(ItemStack stack, ItemStack filterStack) {
@@ -27,9 +27,9 @@ public class CFAFilterSelector {
         return filter.filterFunction.get().apply(stack, filterStack);
     }
 
-    public static FilterType getFilterType(ItemStack filterStack) {
-        if(CACHED_ITEM_FILTER_TYPES.containsKey(filterStack.getItem())) {
-            return CACHED_ITEM_FILTER_TYPES.get(filterStack.getItem());
+    public static FilterType getFilterType(Item filterItem) {
+        if(CACHED_ITEM_FILTER_TYPES.containsKey(filterItem)) {
+            return CACHED_ITEM_FILTER_TYPES.get(filterItem);
         }
 
         for(FilterType type : LOADED_FILTER_TYPES) {
@@ -38,13 +38,17 @@ public class CFAFilterSelector {
             }
 
             if(IntegrationHandler.isModLoaded(type.modId)) {
-                if(type.filterValidationFunction.get().apply(filterStack)) {
-                    CACHED_ITEM_FILTER_TYPES.put(filterStack.getItem(), type);
+                if(type.filterValidationFunction.get().apply(filterItem)) {
+                    CACHED_ITEM_FILTER_TYPES.put(filterItem, type);
                     return type;
                 }
             }
         }
 
         return FilterType.INVALID;
+    }
+
+    public static FilterType getFilterType(ItemStack filterStack) {
+        return getFilterType(filterStack.getItem());
     }
 }

@@ -61,7 +61,7 @@ public abstract class MixinFilterSet {
             return matches ? ItemScroll.SortPref.HIGHEST : ItemScroll.SortPref.INVALID;
         }
         else {
-            boolean result = filterType.filterFunction.get().apply(filterStack, stackToStore);
+            boolean result = filterType.checkFilter(filterStack, stackToStore);
 
             return result ? ItemScroll.SortPref.HIGHEST : ItemScroll.SortPref.INVALID;
         }

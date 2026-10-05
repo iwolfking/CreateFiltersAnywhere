@@ -1,5 +1,6 @@
 package xyz.iwolfking.createfiltersanywhere.api.integration.handlers;
 
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class FilterHandler {
@@ -7,7 +8,7 @@ public class FilterHandler {
         return false;
     }
 
-    public static Boolean isSupportedFilterItem(ItemStack itemStack) {
+    public static Boolean isSupportedFilterItem(Item item) {
         return false;
     }
 }
