@@ -140,6 +140,7 @@ dependencies {
     implementation "curse.maven:modular-routers-250294:7525002"
     implementation "curse.maven:ftb-quests-forge-289412:8885017"
     implementation "curse.maven:ars-nouveau-401955:8993194"
+    implementation "curse.maven:railcraft-reborn-901491:9046819"
 
     //Oritech runtime dependencies
     runtimeOnly "curse.maven:athena-841890:6669522"
