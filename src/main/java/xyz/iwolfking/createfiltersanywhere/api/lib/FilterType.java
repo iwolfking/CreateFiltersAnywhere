@@ -15,6 +15,7 @@ public enum FilterType {
     TOMS_STORAGE("toms_storage", () -> TomsFilterHandler::checkFilter, () -> TomsFilterHandler::isSupportedFilterItem),
     ARS_NOUVEAU("ars_nouveau", () -> ArsFilterHandler::checkFilter, () -> ArsFilterHandler::isSupportedFilterItem),
     PIPEZ("pipez", () -> PipezFilterHandler::checkFilter, () -> PipezFilterHandler::isSupportedFilterItem),
+    ENDERIO("enderio", () -> EnderIOFilterHandler::checkFilter, () -> EnderIOFilterHandler::isSupportedFilterItem),
     INVALID("", () -> FilterHandler::checkFilter, () -> FilterHandler::isSupportedFilterItem);
 
     public final Supplier<BiFunction<ItemStack, ItemStack, Boolean>> filterFunction;

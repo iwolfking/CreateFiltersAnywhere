@@ -2,7 +2,6 @@ package xyz.iwolfking.createfiltersanywhere;
 
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.api.registry.CreateBuiltInRegistries;
-import dev.ftb.mods.ftbquests.api.FTBQuestsAPI;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -29,6 +28,7 @@ import xyz.iwolfking.createfiltersanywhere.attributes.impl.apotheosis.Apotheosis
 import xyz.iwolfking.createfiltersanywhere.attributes.impl.general.ModAttributes;
 import xyz.iwolfking.createfiltersanywhere.attributes.impl.sophisticatedbackpacks.SophisticatedBackpackAttributes;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
+import xyz.iwolfking.createfiltersanywhere.compat.enderio.EnderIOCapabilitiesRegistry;
 import xyz.iwolfking.createfiltersanywhere.data.CFAComponents;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -48,14 +48,19 @@ public class CreateFiltersAnywhere {
 
     public CreateFiltersAnywhere(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(this::registerAttributes);
         NeoForge.EVENT_BUS.register(this);
 
-        NeoForge.EVENT_BUS.register(CFATests.class);
-
-        CFAComponents.register(modEventBus);
+        if(LoadingModList.get().getModFileById("create") != null) {
+            modEventBus.addListener(this::registerAttributes);
+            NeoForge.EVENT_BUS.register(CFATests.class);
+            CFAComponents.register(modEventBus);
+        }
 
         modContainer.registerConfig(ModConfig.Type.SERVER, Config.SPEC);
+
+        if(LoadingModList.get().getModFileById("enderio") != null) {
+            EnderIOCapabilitiesRegistry.init(modEventBus);
+        }
     }
 
 
@@ -78,23 +83,27 @@ public class CreateFiltersAnywhere {
                 CreateAttributeRegistry.register("apoth_socket_count_empty", ApotheosisAttributes.APOTH_SOCKET_COUNT_EMPTY);
             }
 
-            CreateAttributeRegistry.singleton(
-                    "is_uncharged",
-                    EnergyAttributeHelper::isUncharged
-            );
+            if(LoadingModList.get().getModFileById("create") != null) {
+                CreateAttributeRegistry.singleton(
+                        "is_uncharged",
+                        EnergyAttributeHelper::isUncharged
+                );
 
-            CreateAttributeRegistry.singleton(
-                    "can_be_charged",
-                    EnergyAttributeHelper::canBeCharged
-            );
+                CreateAttributeRegistry.singleton(
+                        "can_be_charged",
+                        EnergyAttributeHelper::canBeCharged
+                );
 
-            CreateAttributeRegistry.singleton(
-                    "is_fully_charged",
-                    EnergyAttributeHelper::isFullyCharged
-            );
+                CreateAttributeRegistry.singleton(
+                        "is_fully_charged",
+                        EnergyAttributeHelper::isFullyCharged
+                );
 
-            CreateAttributeRegistry.register("has_data_component", ModAttributes.HAS_DATA_COMPONENT);
-            CreateAttributeRegistry.register("is_item", ModAttributes.IS_ITEM);
+                CreateAttributeRegistry.register("has_data_component", ModAttributes.HAS_DATA_COMPONENT);
+                CreateAttributeRegistry.register("is_item", ModAttributes.IS_ITEM);
+            }
+
+
 
         });
     }
@@ -109,7 +118,9 @@ public class CreateFiltersAnywhere {
                 CFAFilterSelector.LOADED_FILTER_TYPES.add(type);
             }
         }
-        event.enqueueWork(FTBQuestsIntegration::register);
+        if(LoadingModList.get().getModFileById("ftbquests") != null) {
+            event.enqueueWork(FTBQuestsIntegration::register);
+        }
     }
 
     @SubscribeEvent

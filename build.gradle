@@ -16,6 +16,9 @@ repositories {
     maven { url 'https://maven.fallenbreath.me/releases' }
     maven { url = "https://maven.createmod.net" }
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
+    maven { // Registrate
+        url "https://maven.gegy.dev/releases"
+    }
 }
 
 base {
@@ -141,6 +144,8 @@ dependencies {
     implementation "curse.maven:ftb-quests-forge-289412:8885017"
     implementation "curse.maven:ars-nouveau-401955:8993194"
     implementation "curse.maven:railcraft-reborn-901491:9046819"
+    implementation "curse.maven:ender-io-64578:8832691"
+    implementation "com.tterrag.registrate:Registrate:MC1.21.1-1.4.8"
 
     //Oritech runtime dependencies
     runtimeOnly "curse.maven:athena-841890:6669522"
